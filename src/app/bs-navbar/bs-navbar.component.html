@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+  <a class="navbar-brand" routerLink="/">Shopping Card</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+          aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/shopping-card">Shopping Card</a>
+      </li>
+
+      <ng-template #anonymousUser>
+        <li class="nav-item">
+          <a class="btn btn-outline-primary" routerLink="/login">login</a>
+        </li>
+      </ng-template>
+
+
+      <li *ngIf="appUser ;else anonymousUser" ngbDropdown class="nav-item dropdown">
+        <button class="btn btn-outline-dark  dropdown-toggle" id="dropdownBasic1" ngbDropdownToggle>
+          {{appUser.name}}
+        </button>
+        <div ngbDropdownMenu class="dropdown-menu " aria-labelledby="dropdown01">
+          <a class="dropdown-item" routerLink="/my/order">My Order</a>
+          <ng-container *ngIf="appUser.isAdmin">
+            <a class="dropdown-item" routerLink="admin/orders">Manage Order</a>
+            <a class="dropdown-item" routerLink="admin/products">Manage Products</a>
+          </ng-container>
+          <a class="dropdown-item" (click)="logout()">Log Out</a>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</nav>
